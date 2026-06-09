@@ -655,9 +655,9 @@ struct MessageWrapper<C: View>: View {
                 
                 Button {
                     if let server = viewModel.server {
-                        copyUrl(url: URL(string: "https://stoat.chat/server/\(server.id)/channel/\(viewModel.channel.id)/\(viewModel.message.id)")!)
+                        copyUrl(url: URL(string: "https://chat.setoka.net/server/\(server.id)/channel/\(viewModel.channel.id)/\(viewModel.message.id)")!)
                     } else {
-                        copyUrl(url: URL(string: "https://stoat.chat/channel/\(viewModel.channel.id)/\(viewModel.message.id)")!)
+                        copyUrl(url: URL(string: "https://chat.setoka.net/channel/\(viewModel.channel.id)/\(viewModel.message.id)")!)
                         
                     }
                 } label: {
