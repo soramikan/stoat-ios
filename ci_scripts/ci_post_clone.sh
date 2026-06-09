@@ -7,5 +7,5 @@ defaults write com.apple.dt.Xcode IDESkipMacroFingerprintValidation -bool YES
 
 # resolve packages
 cd ..
-xcodebuild -resolvePackageDependencies
+xcodebuild -resolvePackageDependencies -project Stoat.xcodeproj -skipMacroValidation
 cd ci_scripts
