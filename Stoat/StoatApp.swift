@@ -35,6 +35,7 @@ struct StoatApp: App {
                 .tint(state.theme.accent.color)
                 .background(state.theme.background.color)
                 .foregroundStyle(state.theme.foreground.color)
+                .environment(\.locale, state.currentLocale ?? systemLocale)
                 .typesettingLanguage((state.currentLocale ?? systemLocale).language)
                 .onOpenURL { url in
                     print(url)
