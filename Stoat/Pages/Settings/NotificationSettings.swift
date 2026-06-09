@@ -24,19 +24,21 @@ struct NotificationSettings: View {
                             if enabled {
                                 Task {
                                     await viewState.promptForNotifications()
+                                    pushNotificationsEnabled = !viewState.userSettingsStore.store.notifications.rejectedRemoteNotifications
                                 }
                             } else {
                                 Task {
                                     do {
                                         let _ = try await viewState.http.revokeNotificationToken().get()
                                     } catch {
-                                        SentrySDK.capture(error: error as! RevoltError)
+                                        SentrySDK.capture(error: error)
                                         viewState.userSettingsStore.store.notifications.rejectedRemoteNotifications = false
                                         
                                         return
                                     }
                                     viewState.userSettingsStore.store.notifications.rejectedRemoteNotifications = true
                                     viewState.userSettingsStore.store.notifications.wantsNotificationsWhileAppRunning = false
+                                    pushNotificationsEnabled = false
                                     notificationsWhileAppRunningEnabled = false
                                 }
                             }
@@ -49,8 +51,7 @@ struct NotificationSettings: View {
                         onChange: { enabled in
                             viewState.userSettingsStore.store.notifications.wantsNotificationsWhileAppRunning = enabled
                         })
-                    //.disabled(!pushNotificationsEnabled)
-                    .disabled(true)
+                    .disabled(!pushNotificationsEnabled)
                 }
             }
             .listRowBackground(viewState.theme.background2)

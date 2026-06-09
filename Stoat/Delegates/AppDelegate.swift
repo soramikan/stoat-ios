@@ -49,14 +49,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         
         debugPrint("received notification token: \(token)")
 
-        if state.http.token != nil {
-            Task {
-                debugPrint("uploading notification token")
-                _ = await state.http.uploadNotificationToken(token: token)
-            }
-        } else {
+        guard state.http.token != nil else {
             SentrySDK.capture(message: "Received notification token without available session token")
-            fatalError("Received notification token without available session token")
+            return
+        }
+
+        Task {
+            debugPrint("uploading notification token")
+            _ = await state.http.uploadNotificationToken(token: token)
         }
     }
 }
@@ -77,13 +77,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         let state = ViewState.shared ?? ViewState()
         let token = deviceToken.reduce("", {$0 + String(format: "%02x", $1)})
 
-        if state.http.token != nil {
-            Task {
-                await state.http.uploadNotificationToken(token: token)
-            }
-        } else {
+        guard state.http.token != nil else {
             SentrySDK.capture(message: "Received notification token without available session token")
-            fatalError("Received notification token without available session token")
+            return
+        }
+
+        Task {
+            await state.http.uploadNotificationToken(token: token)
         }
     }
 }
@@ -111,13 +111,22 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         let state = ViewState.shared ?? ViewState()
 
         if state.sessionToken == nil {
+            completionHandler()
             return
         }
         
         let userinfo = response.notification.request.content.userInfo
-        let channelId = (userinfo["message"] as! [String: Any])["channel"] as! String
-        let serverId = userinfo["serverId"] as! String
-        let messageId = (userinfo["message"] as! [String: Any])["_id"] as! String
+        guard
+            let message = userinfo["message"] as? [String: Any],
+            let channelId = message["channel"] as? String,
+            let messageId = message["_id"] as? String
+        else {
+            SentrySDK.capture(message: "Received notification without message payload")
+            completionHandler()
+            return
+        }
+
+        let serverId = userinfo["serverId"] as? String
         
         print(response.actionIdentifier)
         debugPrint(response)
@@ -126,11 +135,17 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         case "REPLY":
             let response = response as! UNTextInputNotificationResponse
             Task {
-                await state.http.sendMessage(channel: channelId, replies: [ApiReply(id: messageId, mention: false)], content: response.userText, attachments: [], nonce: "")
+                _ = await state.http.sendMessage(channel: channelId, replies: [ApiReply(id: messageId, mention: false)], content: response.userText, attachments: [], nonce: "")
+                completionHandler()
             }
         default:
             state.currentChannel = .channel(channelId)
-            state.currentSelection = .server(serverId)
+            if let serverId {
+                state.currentSelection = .server(serverId)
+            } else {
+                state.currentSelection = .dms
+            }
+            completionHandler()
         }
     }
     
@@ -149,7 +164,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     
     func userNotificationCenter(_ center: UNUserNotificationCenter, openSettingsFor notification: UNNotification?) {
         print("notification settings")
-        guard let notification = notification else {return} // TODO: app-wide settings?
+        guard notification != nil else {return} // TODO: app-wide settings?
         
         let state = ViewState.shared ?? ViewState()
         if state.sessionToken == nil {
