@@ -52,13 +52,14 @@ public struct LiveKitFeature: Codable {
 }
 
 public struct ApiFeatures: Codable {
-    public init(captcha: CaptchaFeature, email: Bool, invite_only: Bool, autumn: RevoltFeature, january: RevoltFeature, livekit: LiveKitFeature) {
+    public init(captcha: CaptchaFeature, email: Bool, invite_only: Bool, autumn: RevoltFeature, january: RevoltFeature, livekit: LiveKitFeature, limits: ApiLimits? = nil) {
         self.captcha = captcha
         self.email = email
         self.invite_only = invite_only
         self.autumn = autumn
         self.january = january
         self.livekit = livekit
+        self.limits = limits
     }
     
     public var captcha: CaptchaFeature
@@ -67,6 +68,23 @@ public struct ApiFeatures: Codable {
     public var autumn: RevoltFeature
     public var january: RevoltFeature
     public var livekit: LiveKitFeature
+    public var limits: ApiLimits?
+}
+
+public struct ApiLimits: Codable {
+    public init(global: ApiGlobalLimits? = nil) {
+        self.global = global
+    }
+
+    public var global: ApiGlobalLimits?
+}
+
+public struct ApiGlobalLimits: Codable {
+    public init(chunk_upload_size: Int? = nil) {
+        self.chunk_upload_size = chunk_upload_size
+    }
+
+    public var chunk_upload_size: Int?
 }
 
 public struct ApiInfo: Codable {

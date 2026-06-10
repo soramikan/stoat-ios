@@ -7,6 +7,7 @@
 
 import Foundation
 import Alamofire
+import CryptoKit
 import Types
 import os
 
@@ -18,6 +19,28 @@ enum RevoltError: Error {
     case Alamofire(AFError)
     case HTTPError(RevoltHTTPError?, Int)
     case JSONDecoding(any Error)
+}
+
+private let defaultUploadChunkSize = 50 * 1024 * 1024
+
+private struct ChunkUploadResponse: Decodable {
+    var upload_id: String
+    var chunk_index: Int
+    var received_chunks: Int
+    var total_chunks: Int
+}
+
+private struct CompleteUploadPayload: Encodable {
+    var filename: String
+    var total_chunks: Int
+    var total_size: Int
+    var sha256: String
+}
+
+private func sha256Hex(_ data: Data) -> String {
+    SHA256.hash(data: data)
+        .map { String(format: "%02x", $0) }
+        .joined()
 }
 
 struct HTTPClient {
@@ -179,18 +202,57 @@ struct HTTPClient {
 
     func uploadFile(data: Data, name: String, category: FileCategory) async -> Result<AutumnResponse, RevoltError> {
         let url = "\(apiInfo!.features.autumn.url)/\(category.rawValue)"
+        let uploadId = UUID().uuidString.lowercased()
+        let configuredChunkSize = apiInfo?.features.limits?.global?.chunk_upload_size ?? defaultUploadChunkSize
+        let chunkSize = configuredChunkSize > 0 ? configuredChunkSize : defaultUploadChunkSize
+        let totalChunks = max(1, Int(ceil(Double(data.count) / Double(chunkSize))))
+        let checksum = sha256Hex(data)
 
         var headers: HTTPHeaders = HTTPHeaders()
-        
+
         if token != nil {
             headers.add(name: "x-session-token", value: token!)
         }
-        
-        return await session.upload(
-            multipartFormData: { form in form.append(data, withName: "file", fileName: name)},
-            to: url,
+
+        for chunkIndex in 0..<totalChunks {
+            let start = chunkIndex * chunkSize
+            let end = min(data.count, start + chunkSize)
+            let chunk = data.subdata(in: start..<end)
+
+            let chunkResult = await session.upload(
+                multipartFormData: { form in
+                    form.append(uploadId.data(using: .utf8)!, withName: "upload_id")
+                    form.append(String(chunkIndex).data(using: .utf8)!, withName: "chunk_index")
+                    form.append(String(totalChunks).data(using: .utf8)!, withName: "total_chunks")
+                    form.append(String(data.count).data(using: .utf8)!, withName: "total_size")
+                    form.append(chunk, withName: "chunk", fileName: name)
+                },
+                to: "\(url)/chunks",
+                headers: headers
+            )
+                .validate()
+                .serializingDecodable(ChunkUploadResponse.self, decoder: JSONDecoder())
+                .response
+                .result
+
+            if case .failure(let error) = chunkResult {
+                return .failure(.Alamofire(error))
+            }
+        }
+
+        return await session.request(
+            "\(url)/chunks/\(uploadId)/complete",
+            method: .post,
+            parameters: CompleteUploadPayload(
+                filename: name,
+                total_chunks: totalChunks,
+                total_size: data.count,
+                sha256: checksum
+            ),
+            encoder: JSONParameterEncoder.default,
             headers: headers
         )
+            .validate()
             .serializingDecodable(decoder: JSONDecoder())
             .response
             .result
