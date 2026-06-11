@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1701E08C2C4C395900DD970F /* emoji_15_1_ordering.json in Resources */ = {isa = PBXBuildFile; fileRef = 1701E08B2C4C395900DD970F /* emoji_15_1_ordering.json */; };
 		17C0DE012E10000000B00001 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 17C0DE002E10000000B00001 /* Localizable.xcstrings */; };
+		17C0DE112E10000100B00001 /* ServerCategoriesSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE102E10000100B00001 /* ServerCategoriesSettings.swift */; };
+		17C0DE132E10000100B00001 /* ServerMembersSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE122E10000100B00001 /* ServerMembersSettings.swift */; };
+		17C0DE152E10000100B00001 /* ServerInvitesSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE142E10000100B00001 /* ServerInvitesSettings.swift */; };
+		17C0DE172E10000100B00001 /* ReportUserSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE162E10000100B00001 /* ReportUserSheetView.swift */; };
 		170410972CA478D5002C1445 /* AllPermissionsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170410962CA478D5002C1445 /* AllPermissionsSettings.swift */; };
 		170410992CA478F6002C1445 /* DefaultRoleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170410982CA478F6002C1445 /* DefaultRoleSettings.swift */; };
 		170C23CE2C224B460057E399 /* UserSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170C23CD2C224B460057E399 /* UserSettingsStore.swift */; };
@@ -304,6 +308,10 @@
 		17BF54CC2B1785E200178866 /* HomeWelcome.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWelcome.swift; sourceTree = "<group>"; };
 		17BF54D02B17B24200178866 /* LanguageSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageSettings.swift; sourceTree = "<group>"; };
 		17C0DE002E10000000B00001 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		17C0DE102E10000100B00001 /* ServerCategoriesSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerCategoriesSettings.swift; sourceTree = "<group>"; };
+		17C0DE122E10000100B00001 /* ServerMembersSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerMembersSettings.swift; sourceTree = "<group>"; };
+		17C0DE142E10000100B00001 /* ServerInvitesSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerInvitesSettings.swift; sourceTree = "<group>"; };
+		17C0DE162E10000100B00001 /* ReportUserSheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportUserSheetView.swift; sourceTree = "<group>"; };
 		17C212432CD19E75002D486C /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
 		17C444572B06CC5400F97E4A /* ForgotPassword.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassword.swift; sourceTree = "<group>"; };
 		17C45D4A2C6167D300CD8ED4 /* Stoat.profdata */ = {isa = PBXFileReference; lastKnownFileType = file; path = Stoat.profdata; sourceTree = "<group>"; };
@@ -442,6 +450,9 @@
 			children = (
 				17F555262AFC229900958F2F /* ServerSettings.swift */,
 				171594C22B4B2A0D00D7C3C3 /* ServerOverviewSettings.swift */,
+				17C0DE102E10000100B00001 /* ServerCategoriesSettings.swift */,
+				17C0DE122E10000100B00001 /* ServerMembersSettings.swift */,
+				17C0DE142E10000100B00001 /* ServerInvitesSettings.swift */,
 				1764856F2CA3855F00AF8141 /* ServerRoles */,
 				1751239C2CAC8A1100D30C23 /* ServerEmojiSettings.swift */,
 				1746A4AC2CADD76100095CF3 /* ServerBanSettings.swift */,
@@ -652,6 +663,7 @@
 				17A6894E2D95FC6A00F25C6C /* MemberProfileSheet.swift */,
 				17E28E072AF319D500F6069F /* AddServerSheet.swift */,
 				17CE2E132AE709CE0059FB3A /* UserSheet.swift */,
+				17C0DE162E10000100B00001 /* ReportUserSheetView.swift */,
 				17BC476A2B9CB51200A593DA /* ShareInviteSheet.swift */,
 				173F16262C3C22540009FDF9 /* ServerInfoSheet.swift */,
 			);
@@ -1125,6 +1137,7 @@
 				17CE783F2B129E28006C1D2C /* ServerScrollView.swift in Sources */,
 				DA99EC5029D5F35900419FDA /* Login.swift in Sources */,
 				17F9D7632C9208B500D0BB6F /* MessageReactionsSheet.swift in Sources */,
+				17C0DE112E10000100B00001 /* ServerCategoriesSettings.swift in Sources */,
 				178BB1102B02D89A001143A4 /* HCaptchaView.swift in Sources */,
 				17DFB4642AE06A5D00E1D417 /* Settings.swift in Sources */,
 				17E5AA172CD8686D00C1EA19 /* ChannelPins.swift in Sources */,
@@ -1165,6 +1178,7 @@
 				17772C182C30AF83000D1EDA /* AppDelegate.swift in Sources */,
 				17C444582B06CC5400F97E4A /* ForgotPassword.swift in Sources */,
 				17CE2E142AE709CE0059FB3A /* UserSheet.swift in Sources */,
+				17C0DE132E10000100B00001 /* ServerMembersSettings.swift in Sources */,
 				1764856E2CA383BD00AF8141 /* ServerRolesSettings.swift in Sources */,
 				17429D992B4C931D0036105A /* ChannelOverviewSettings.swift in Sources */,
 				17966B652AE0842A00BAEC58 /* ChannelIcon.swift in Sources */,
@@ -1186,6 +1200,8 @@
 				171594C32B4B2A0D00D7C3C3 /* ServerOverviewSettings.swift in Sources */,
 				173F16272C3C22580009FDF9 /* ServerInfoSheet.swift in Sources */,
 				1718FB542AF8470400E9C511 /* ReportMessageSheetView.swift in Sources */,
+				17C0DE152E10000100B00001 /* ServerInvitesSettings.swift in Sources */,
+				17C0DE172E10000100B00001 /* ReportUserSheetView.swift in Sources */,
 				17E019DA2AF199A600AB4663 /* MessageReply.swift in Sources */,
 				176485712CA3858100AF8141 /* RoleSettings.swift in Sources */,
 				17D5C9442B14DF500060C035 /* DMScrollView.swift in Sources */,

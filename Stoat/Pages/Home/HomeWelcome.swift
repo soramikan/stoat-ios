@@ -35,15 +35,6 @@ struct HomeWelcome: View {
                 }
                 
                 VStack {
-                    Text("The iOS app is current in early beta, plenty of features are unimplemented or buggy, if you want a better experience please use the web app on iOS for now.")
-                        .foregroundStyle(viewState.theme.accent)
-                        .multilineTextAlignment(.leading)
-                        .padding(8)
-                }
-                .addBorder(viewState.theme.accent, width: 2, cornerRadius: 8)
-                .padding(.horizontal, 32)
-                
-                VStack {
                     HomeButton(title: "Discover Stoat", description: "Find a community based on your hobbies or interests.") {
                         Image(systemName: "safari.fill")
                             .resizable()

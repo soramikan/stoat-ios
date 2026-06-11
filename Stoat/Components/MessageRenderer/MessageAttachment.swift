@@ -14,6 +14,8 @@ var fmt = ByteCountFormatter()
 
 struct MessageAttachment: View {
     @EnvironmentObject var viewState: ViewState
+    @Environment(\.openURL) var openURL
+
     var attachment: File
     
         
@@ -45,7 +47,9 @@ struct MessageAttachment: View {
                     Spacer()
                     
                     Button {
-                        print("todo")
+                        if let url = URL(string: viewState.formatUrl(with: attachment)) {
+                            openURL(url)
+                        }
                     } label: {
                         Image(systemName: "square.and.arrow.down")
                     }

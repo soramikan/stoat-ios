@@ -111,6 +111,12 @@ struct GroupChannelCreate: Encodable {
     var users: [String]
 }
 
+struct ServerCreatePayload: Encodable {
+    var name: String
+    var description: String?
+    var nsfw: Bool?
+}
+
 struct ServerEdit: Encodable {
     enum Remove: String, Codable {
         case description = "Description"

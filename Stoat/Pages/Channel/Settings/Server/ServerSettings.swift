@@ -28,7 +28,9 @@ struct ServerSettings: View {
                 }
                 
                 if userPermissions.contains(.manageChannel) {
-                    NavigationLink(destination: Text("Todo")) {
+                    NavigationLink {
+                        ServerCategoriesSettings(server: $server)
+                    } label: {
                         Image(systemName: "list.bullet")
                         Text("Categories")
                     }
@@ -58,13 +60,17 @@ struct ServerSettings: View {
             .listRowBackground(viewState.theme.background2)
             
             Section("User Management") {
-                NavigationLink(destination: Text("Todo")) {
+                NavigationLink {
+                    ServerMembersSettings(server: $server)
+                } label: {
                     Image(systemName: "person.2.fill")
                     Text("Members")
                 }
                 
                 if userPermissions.contains(.manageServer) {
-                    NavigationLink(destination: Text("Todo")) {
+                    NavigationLink {
+                        ServerInvitesSettings(server: $server)
+                    } label: {
                         Image(systemName: "envelope.fill")
                         Text("Invites")
                     }

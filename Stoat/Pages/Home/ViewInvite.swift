@@ -23,7 +23,38 @@ struct ViewInvite: View {
                 case .some(.none):
                     Text("Invalid invite")
                 case .group(let groupInfo):
-                    Text("Group TODO")
+                    VStack(spacing: 16) {
+                        Image(systemName: "person.2.fill")
+                            .font(.system(size: 44))
+                            .foregroundStyle(viewState.theme.foreground2)
+
+                        Text(verbatim: groupInfo.channel_name)
+                            .font(.title2)
+                            .fontWeight(.medium)
+
+                        if let description = groupInfo.channel_description, !description.isEmpty {
+                            Contents(text: .constant(description), fontSize: 15)
+                                .fixedSize(horizontal: false, vertical: true)
+                        }
+
+                        HStack {
+                            Text("Invited by")
+
+                            HStack {
+                                if let avatar = groupInfo.user_avatar {
+                                    LazyImage(source: .file(avatar), clipTo: Circle())
+                                        .frame(width: 24, height: 24)
+                                }
+
+                                Text(verbatim: groupInfo.user_name)
+                            }
+                        }
+                        .foregroundStyle(viewState.theme.foreground2)
+
+                    }
+                    .padding(16)
+                    .background(viewState.theme.background.opacity(0.95))
+                    .clipShape(RoundedRectangle(cornerRadius: 8))
                 case .server(let serverInfo):
                     if let banner = serverInfo.server_banner {
                         LazyImage(source: .file(banner), clipTo: Rectangle())

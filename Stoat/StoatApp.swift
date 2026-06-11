@@ -212,20 +212,12 @@ struct InnerApp: View {
 
 struct MainApp: View {
     @EnvironmentObject var viewState: ViewState
-    #if !DEBUG
-    @State var alphaAlert = true
-    #else
-    @State var alphaAlert = false
-    #endif
     
     var body: some View {
         Home(
             currentSelection: $viewState.currentSelection,
             currentChannel: $viewState.currentChannel
         )
-        .alert("Warning", isPresented: $alphaAlert, actions: {}, message: {
-            Text("This app is in very early alpha and is expected to be unfinished and crash in lots of places, if you wish for a stable experience please use the web app for the time being.")
-        })
         .navigationDestination(for: NavigationDestination.self) { dest in
             switch dest {
                 case .channel_info(let id):

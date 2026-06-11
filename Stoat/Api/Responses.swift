@@ -36,6 +36,11 @@ struct JoinResponse: Decodable {
     var server: Server
 }
 
+struct CreateServerResponse: Decodable {
+    var channels: [Channel]
+    var server: Server
+}
+
 struct Unread: Decodable, Identifiable {
     struct Id: Decodable, Hashable {
         var channel: String

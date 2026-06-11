@@ -331,7 +331,7 @@ struct UserSheet: View {
         .background(viewState.theme.background.color)
         .presentationBackground(viewState.theme.background)
         .sheet(isPresented: $showReportSheet) {
-            Text("TODO")
+            ReportUserSheetView(showSheet: $showReportSheet, user: user)
         }
         .task {
             if let profile = user.profile {

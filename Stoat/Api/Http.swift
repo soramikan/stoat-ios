@@ -275,6 +275,10 @@ struct HTTPClient {
         await req(method: .post, route: "/safety/report", parameters: ContentReportPayload(type: .Message, contentId: id, reason: reason, userContext: userContext))
     }
 
+    func reportUser(id: String, reason: ContentReportPayload.ContentReportReason, userContext: String) async -> Result<EmptyResponse, RevoltError> {
+        await req(method: .post, route: "/safety/report", parameters: ContentReportPayload(type: .User, contentId: id, reason: reason, userContext: userContext))
+    }
+
     func createAccount(email: String, password: String, invite: String?, captcha: String?) async -> Result<EmptyResponse, RevoltError> {
         return await req(method: .post, route: "/auth/account/create", parameters: AccountCreatePayload(email: email, password: password, invite: invite, captcha: captcha))
     }
@@ -339,8 +343,16 @@ struct HTTPClient {
         await req(method: .post, route: "/channels/create", parameters: GroupChannelCreate(name: name, users: users))
     }
 
+    func createServer(name: String, description: String?, nsfw: Bool?) async -> Result<CreateServerResponse, RevoltError> {
+        await req(method: .post, route: "/servers/create", parameters: ServerCreatePayload(name: name, description: description, nsfw: nsfw))
+    }
+
     func createInvite(channel: String) async -> Result<Invite, RevoltError> {
         await req(method: .post, route: "/channels/\(channel)/invites")
+    }
+
+    func deleteInvite(code: String) async -> Result<EmptyResponse, RevoltError> {
+        await req(method: .delete, route: "/invites/\(code)")
     }
     
     func joinVoiceChannel(channel: String, node: String) async -> Result<VoiceChannelToken, RevoltError> {
