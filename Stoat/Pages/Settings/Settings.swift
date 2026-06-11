@@ -117,7 +117,7 @@ struct Settings: View {
                         .resizable()
                         .scaledToFit()
                         .frame(width: 16, height: 16)
-                    Text("Experiments")
+                    Text("Advanced")
                 }
 #if DEBUG
                 NavigationLink {
