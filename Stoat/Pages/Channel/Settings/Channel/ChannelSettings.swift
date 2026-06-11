@@ -11,9 +11,29 @@ import Types
 
 struct ChannelSettings: View {
     @EnvironmentObject var viewState: ViewState
+    @Environment(\.dismiss) var dismiss
     
     @Binding var server: Server?
     @Binding var channel: Channel
+    @State var showDeleteChannelDialog = false
+    @State var isDeletingChannel = false
+    @State var deletionError: String?
+
+    func deleteChannel() async {
+        guard !isDeletingChannel else { return }
+
+        isDeletingChannel = true
+        deletionError = nil
+        defer { isDeletingChannel = false }
+
+        do {
+            let _ = try await viewState.http.deleteChannel(channel: channel.id).get()
+            viewState.removeChannelFromState(id: channel.id)
+            dismiss()
+        } catch let e {
+            deletionError = e.localizedDescription
+        }
+    }
     
     var body: some View {
         List {
@@ -44,15 +64,22 @@ struct ChannelSettings: View {
             .listRowBackground(viewState.theme.background2)
             
             Button {
-                
+                showDeleteChannelDialog = true
             } label: {
                 HStack {
                     Image(systemName: "trash.fill")
-                    Text("Delete channel")
+                    Text(isDeletingChannel ? "Deleting channel..." : "Delete channel")
                 }
                 .foregroundStyle(.red)
             }
+            .disabled(isDeletingChannel)
             .listRowBackground(viewState.theme.background2)
+
+            if let deletionError {
+                Text(verbatim: deletionError)
+                    .foregroundStyle(viewState.theme.error)
+                    .listRowBackground(viewState.theme.background2)
+            }
 
         }
         .scrollContentBackground(.hidden)
@@ -63,6 +90,16 @@ struct ChannelSettings: View {
             }
         }
         .toolbarBackground(viewState.theme.topBar.color, for: .automatic)
+        .confirmationDialog("Delete channel?", isPresented: $showDeleteChannelDialog) {
+            Button("Delete channel", role: .destructive) {
+                Task { await deleteChannel() }
+            }
+            .disabled(isDeletingChannel)
+
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will permanently delete \(channel.name ?? "this channel").")
+        }
 
     }
 }

@@ -367,6 +367,24 @@ struct HTTPClient {
         await req(method: .patch, route: "/servers/\(server)", parameters: edits)
     }
 
+    func deleteServer(server: String, leaveSilently: Bool = false) async -> Result<EmptyResponse, RevoltError> {
+        await req(
+            method: .delete,
+            route: "/servers/\(server)",
+            parameters: ["leave_silently": leaveSilently],
+            encoder: URLEncodedFormParameterEncoder(destination: .queryString)
+        )
+    }
+
+    func deleteChannel(channel: String, leaveSilently: Bool = false) async -> Result<EmptyResponse, RevoltError> {
+        await req(
+            method: .delete,
+            route: "/channels/\(channel)",
+            parameters: ["leave_silently": leaveSilently],
+            encoder: URLEncodedFormParameterEncoder(destination: .queryString)
+        )
+    }
+
     func reactMessage(channel: String, message: String, emoji: String) async -> Result<EmptyResponse, RevoltError> {
         await req(method: .put, route: "/channels/\(channel)/messages/\(message)/reactions/\(emoji)")
     }

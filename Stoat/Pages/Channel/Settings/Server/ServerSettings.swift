@@ -11,9 +11,30 @@ import Types
 
 struct ServerSettings: View {
     @EnvironmentObject var viewState: ViewState
+    @Environment(\.dismiss) var dismiss
+
     @Binding var server: Server
     
     @State var userPermissions: Permissions = Permissions.all
+    @State var showDeleteServerDialog = false
+    @State var isDeletingServer = false
+    @State var deletionError: String?
+
+    func deleteServer() async {
+        guard !isDeletingServer else { return }
+
+        isDeletingServer = true
+        deletionError = nil
+        defer { isDeletingServer = false }
+
+        do {
+            let _ = try await viewState.http.deleteServer(server: server.id).get()
+            viewState.removeServerFromState(id: server.id)
+            dismiss()
+        } catch let e {
+            deletionError = e.localizedDescription
+        }
+    }
     
     var body: some View {
         List {
@@ -89,15 +110,22 @@ struct ServerSettings: View {
             
             if server.owner == viewState.currentUser?.id {
                 Button {
-                    
+                    showDeleteServerDialog = true
                 } label: {
-                        HStack {
-                            Image(systemName: "trash.fill")
-                            Text("Delete server")
-                        }
-                        .foregroundStyle(.red)
+                    HStack {
+                        Image(systemName: "trash.fill")
+                        Text(isDeletingServer ? "Deleting server..." : "Delete server")
+                    }
+                    .foregroundStyle(.red)
                 }
+                .disabled(isDeletingServer)
                 .listRowBackground(viewState.theme.background2)
+            }
+
+            if let deletionError {
+                Text(verbatim: deletionError)
+                    .foregroundStyle(viewState.theme.error)
+                    .listRowBackground(viewState.theme.background2)
             }
 
             
@@ -113,6 +141,16 @@ struct ServerSettings: View {
             }
         }
         .toolbarBackground(viewState.theme.topBar.color, for: .automatic)
+        .confirmationDialog("Delete server?", isPresented: $showDeleteServerDialog) {
+            Button("Delete server", role: .destructive) {
+                Task { await deleteServer() }
+            }
+            .disabled(isDeletingServer)
+
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("This will permanently delete \(server.name).")
+        }
         .task {
             if let user = viewState.currentUser, let member = viewState.members[server.id]?[user.id] {
                 userPermissions = resolveServerPermissions(user: user, member: member, server: server)

@@ -1355,6 +1355,55 @@ public class ViewState: ObservableObject {
             }
         }
     }
+
+    func removeChannelFromState(id: String) {
+        let serverId = channels[id]?.server
+
+        channels.removeValue(forKey: id)
+        channelMessages.removeValue(forKey: id)
+
+        if let serverId, var server = servers[serverId] {
+            server.channels.removeAll { $0 == id }
+            server.categories = server.categories?.map { category in
+                var category = category
+                category.channels.removeAll { $0 == id }
+                return category
+            }
+            servers[serverId] = server
+        }
+
+        let selectedChannelId: String? = switch currentChannel {
+            case .channel(let currentId), .force_textchannel(let currentId), .force_voicechannel(let currentId):
+                currentId
+            default:
+                nil
+        }
+
+        if selectedChannelId == id {
+            if let serverId, servers[serverId] != nil {
+                selectServer(withId: serverId)
+            } else {
+                selectDms()
+            }
+        }
+    }
+
+    func removeServerFromState(id: String) {
+        if let server = servers[id] {
+            for channelId in server.channels {
+                channels.removeValue(forKey: channelId)
+                channelMessages.removeValue(forKey: channelId)
+            }
+        }
+
+        servers.removeValue(forKey: id)
+        members.removeValue(forKey: id)
+        userSettingsStore.store.lastOpenChannels.removeValue(forKey: id)
+
+        if currentSelection == .server(id) {
+            selectDms()
+        }
+    }
     
     func selectChannel(inServer server: String, withId id: String) {
         currentSelection = .server(server)
