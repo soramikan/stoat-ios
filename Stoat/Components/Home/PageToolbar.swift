@@ -64,7 +64,7 @@ extension PageToolbar where T == EmptyView {
 #Preview {
     
     PageToolbar(toggleSidebar: {}) {
-        Text("Placeholder")
+        Text("Toolbar")
     } trailing: {
         Text("Ending")
     }

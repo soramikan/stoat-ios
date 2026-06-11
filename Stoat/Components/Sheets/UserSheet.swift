@@ -234,7 +234,23 @@ struct UserSheet: View {
                                     .background(viewState.theme.accent, in: RoundedRectangle(cornerRadius: 50))
                                     
                                 case .Blocked:
-                                    EmptyView()  // TODO: unblock
+                                    Button {
+                                        Task {
+                                            if case .success(let unblockedUser) = await viewState.http.unblockUser(user: user.id) {
+                                                user = unblockedUser
+                                            }
+                                        }
+                                    } label: {
+                                        HStack {
+                                            Spacer()
+
+                                            Text("Unblock")
+
+                                            Spacer()
+                                        }
+                                    }
+                                    .padding(8)
+                                    .background(viewState.theme.accent, in: RoundedRectangle(cornerRadius: 50))
                                 case .BlockedOther:
                                     EmptyView()
                                 case .Friend:
