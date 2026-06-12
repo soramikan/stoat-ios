@@ -1,6 +1,6 @@
 //
 //  MessageContentsView.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 12/12/2023.
 //

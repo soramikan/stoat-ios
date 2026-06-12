@@ -1,6 +1,6 @@
 //
 //  FriendsList.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 14/11/2023.
 //

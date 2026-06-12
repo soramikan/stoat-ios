@@ -1,6 +1,6 @@
 //
 //  ServerScrollView.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo Manca on 2023-11-25.
 //

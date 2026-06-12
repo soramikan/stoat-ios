@@ -1,6 +1,6 @@
 //
 //  Webhook.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 26/03/2025.
 //

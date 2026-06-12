@@ -1,6 +1,6 @@
 //
 //  AddBot.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 29/11/2024.
 //

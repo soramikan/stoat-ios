@@ -1,6 +1,6 @@
 //
 //  AlertPopup.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 13/10/2024.
 //

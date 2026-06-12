@@ -1,6 +1,6 @@
 //
 //  VoiceChannelView.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 29/03/2024.
 //

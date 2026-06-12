@@ -1,6 +1,6 @@
 //
 //  CreateServer.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 24/08/2024.
 //

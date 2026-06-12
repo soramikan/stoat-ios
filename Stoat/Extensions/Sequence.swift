@@ -1,6 +1,6 @@
 //
 //  Sequence.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 23/05/2025.
 //

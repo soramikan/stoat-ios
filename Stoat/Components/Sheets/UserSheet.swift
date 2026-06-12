@@ -1,6 +1,6 @@
 //
 //  MemberSheet.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 23/10/2023.
 //
@@ -112,7 +112,7 @@ struct UserSheet: View {
                     Tile("Joined") { 
                         VStack(alignment: .leading) {
                             Text(createdAt(id: user.id), style: .date)
-                            Text("Revolt")
+                            Text("Stoat")
                                 .bold()
                         }
                         //.frame(maxWidth: .infinity)

@@ -1,6 +1,6 @@
 //
 //  ChannelRolePermissionsSettings.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 25/09/2024.
 //
@@ -69,7 +69,7 @@ struct ChannelRolePermissionsSettings: View {
                 if initial != currentValue {
                     Button {
                         Task {
-                            var output: Result<Channel, RevoltError>? = nil
+                            var output: Result<Channel, StoatError>? = nil
                             
                             if let roleId {
                                 switch currentValue {

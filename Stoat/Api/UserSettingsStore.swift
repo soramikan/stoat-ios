@@ -1,6 +1,6 @@
 //
 //  UserSettingsStore.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 2024-02-23.
 //
@@ -221,8 +221,8 @@ class UserSettingsData {
     
     static var cacheFile: URL? {
         if let caches = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            let revoltDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
-            let resp = revoltDir.appendingPathComponent("userInfoCache", conformingTo: .json)
+            let appDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
+            let resp = appDir.appendingPathComponent("userInfoCache", conformingTo: .json)
             return resp
         }
         return nil
@@ -230,8 +230,8 @@ class UserSettingsData {
     
     static var storeFile: URL? {
         if let caches = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-            let revoltDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
-            let resp = revoltDir.appendingPathComponent("userSettings", conformingTo: .json)
+            let appDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
+            let resp = appDir.appendingPathComponent("userSettings", conformingTo: .json)
             return resp
         }
         return nil
@@ -346,7 +346,7 @@ class UserSettingsData {
             writeCacheToFile()
         } catch {
             self.cacheState = .failed
-            switch error as? RevoltError {
+            switch error as? StoatError {
                 case .Alamofire(let afErr):
                     if afErr.responseCode == 401 {
                         await state.setSignedOutState()
@@ -369,9 +369,9 @@ class UserSettingsData {
     func writeCacheToFile() {
         DispatchQueue.main.async(qos: .utility) {
             if let caches = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-                let revoltDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
+                let appDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
                 do {
-                    try FileManager.default.createDirectory(at: revoltDir, withIntermediateDirectories: false)
+                    try FileManager.default.createDirectory(at: appDir, withIntermediateDirectories: false)
                 } catch {} //ignore error if it already exists
                 
                 do {
@@ -392,9 +392,9 @@ class UserSettingsData {
     func writeStoreToFile() {
         DispatchQueue.main.async(qos: .utility) {
             if let caches = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask).first {
-                let revoltDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
+                let appDir = caches.appendingPathComponent(Bundle.main.bundleIdentifier!, conformingTo: .directory)
                 do {
-                    try FileManager.default.createDirectory(at: revoltDir, withIntermediateDirectories: false)
+                    try FileManager.default.createDirectory(at: appDir, withIntermediateDirectories: false)
                 } catch {} //ignore error if it already exists
             }
             do {

@@ -16,9 +16,10 @@ struct StoatApp: App {
     @StateObject var state = ViewState.shared ?? ViewState()
 
     init() {
-        if !isPreview {
+        let sentryDsn = Bundle.main.object(forInfoDictionaryKey: "SENTRY_DSN") as? String ?? ""
+        if !isPreview && !sentryDsn.isEmpty {
             SentrySDK.start { options in
-                options.dsn = "https://4049414032e74d9098a44e67779aa648@sentry.revolt.chat/7"
+                options.dsn = sentryDsn
                 options.tracesSampleRate = 1.0
                 options.profilesSampleRate = 1.0
                 options.attachViewHierarchy = true

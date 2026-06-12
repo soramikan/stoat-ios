@@ -1,6 +1,6 @@
 //
 //  View.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 2024-03-10.
 //

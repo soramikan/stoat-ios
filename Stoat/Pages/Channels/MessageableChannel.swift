@@ -1,6 +1,6 @@
 //
 //  TextChannel.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 18/10/2023.
 //

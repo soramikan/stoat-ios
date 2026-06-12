@@ -1,6 +1,6 @@
 //
 //  EnvironmentValues.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 17/10/2024.
 //

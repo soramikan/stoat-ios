@@ -1,6 +1,6 @@
 //
 //  MessageReactionsSheet.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 11/09/2024.
 //

@@ -1,6 +1,6 @@
 //
 //  ChannelInfo.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 06/12/2023.
 //
@@ -252,7 +252,7 @@ struct ChannelInfo: View {
                             let res = await viewState.http.createInvite(channel: channel.id)
                             
                             if case .success(let invite) = res {
-                                showInviteSheet = InviteUrl(url: URL(string: "https://rvlt.gg/\(invite.id)")!)
+                                showInviteSheet = InviteUrl(url: URL(string: "https://chat.setoka.net/invite/\(invite.id)")!)
                             }
                         }
                     } label: {

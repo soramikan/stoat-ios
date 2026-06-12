@@ -1,6 +1,6 @@
 //
 //  EmojiPicker.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 04/02/2024.
 //

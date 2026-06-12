@@ -1,6 +1,6 @@
 //
 //  Permissions.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 18/11/2023.
 //

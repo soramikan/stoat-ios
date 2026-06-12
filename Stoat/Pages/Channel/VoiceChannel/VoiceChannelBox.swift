@@ -1,6 +1,6 @@
 //
 //  VoiceChannelBox.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 27/01/2025.
 //

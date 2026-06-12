@@ -1,6 +1,6 @@
 //
 //  UserSettings.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 2024-02-10.
 //
@@ -12,7 +12,7 @@ import Alamofire // literally just for types
 import UniformTypeIdentifiers
 
 
-let log = Logger(subsystem: "app.revolt.chat", category: "UserSettingsViews")
+let log = Logger(subsystem: "dev.mikanbox.stoat", category: "UserSettingsViews")
 
 func generateTOTPUrl(secret: String, email: String) -> String {
     return "otpauth://totp/Stoat:\(email)?secret=\(secret)&issuer=Stoat"
@@ -327,7 +327,7 @@ fileprivate struct RemoveTOTPSheet: View {
                 print(try await viewState.http.disableTOTP(mfaToken: ticket.token).get())
                 showSheet = false
             } catch {
-                let error = error as! RevoltError
+                let error = error as! StoatError
                 SentrySDK.capture(error: error)
                 
                 withAnimation {
@@ -370,7 +370,7 @@ fileprivate struct GenerateRecoveryCodesSheet: View {
                     codes = _codes
                 }
             } catch {
-                let error = error as! RevoltError
+                let error = error as! StoatError
                 SentrySDK.capture(error: error)
                 
                 withAnimation {
@@ -1045,4 +1045,3 @@ struct UserSettings: View {
         }
     }
 }
-

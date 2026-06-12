@@ -1,6 +1,6 @@
 //
 //  UIImage.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 19/07/2024.
 //

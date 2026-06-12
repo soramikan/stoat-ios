@@ -1,6 +1,6 @@
 //
 //  ChannelSettiings.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 08/01/2024.
 //

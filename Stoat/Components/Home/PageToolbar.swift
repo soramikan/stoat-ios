@@ -1,6 +1,6 @@
 //
 //  PageToolbar.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 27/11/2023.
 //

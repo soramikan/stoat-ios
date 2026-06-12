@@ -1,6 +1,6 @@
 //
 //  Discovery.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 18/11/2023.
 //
@@ -56,7 +56,7 @@ fileprivate struct WebView: UIViewRepresentable {
 //            decisionHandler: @escaping @MainActor (WKNavigationActionPolicy) -> Void
 //        ) {
 //            print(navigationAction)
-//            if navigationAction.navigationType == .linkActivated, let url = navigationAction.request.url, url.host() == "app.revolt.chat" {
+//            if navigationAction.navigationType == .linkActivated, let url = navigationAction.request.url, url.host() == "chat.setoka.net" {
 //                decisionHandler(.cancel)
 //                viewState.path.append(NavigationDestination.invite(url.lastPathComponent))
 //            } else {
@@ -101,7 +101,7 @@ fileprivate struct WebView: UIViewRepresentable {
             document.addEventListener("click", (evt) => {
                 let el = findAElement(evt.target)
 
-                if (el && el.href.startsWith("https://app.revolt.chat/server")) {
+                if (el && el.href.startsWith("https://chat.setoka.net/server")) {
                     let inviteCode = el.href.split("/").reverse()[0]
                     window.webkit.messageHandlers.serverInviteClicked.postMessage(inviteCode)
                 }
@@ -144,7 +144,7 @@ struct Discovery: View {
     @EnvironmentObject var viewState: ViewState
 
     var body: some View {
-        WebView(url: URL(string: "https://rvlt.gg/discover?embedded=true")!)
+        WebView(url: URL(string: "https://chat.setoka.net/discover?embedded=true")!)
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     HStack {
@@ -160,4 +160,3 @@ struct Discovery: View {
             .toolbarBackground(viewState.theme.topBar.color, for: .automatic)
     }
 }
-

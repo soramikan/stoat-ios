@@ -1,6 +1,6 @@
 //
 //  Websocket.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Zomatree on 21/04/2023.
 //

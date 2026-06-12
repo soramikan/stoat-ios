@@ -1,6 +1,6 @@
 //
 //  ChannelPins.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 4/11/2024.
 //

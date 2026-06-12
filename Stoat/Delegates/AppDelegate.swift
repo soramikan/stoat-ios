@@ -1,6 +1,6 @@
 //
 //  AppDelegate.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 2023-11-29.
 //

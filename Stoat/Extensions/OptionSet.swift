@@ -1,6 +1,6 @@
 //
 //  OptionSet.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 26/09/2024.
 //

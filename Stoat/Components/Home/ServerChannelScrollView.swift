@@ -1,6 +1,6 @@
 //
 //  ServerChannelScrollView.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 2023-11-25.
 //
@@ -172,7 +172,7 @@ struct ChannelListItem: View {
                     let res = await viewState.http.createInvite(channel: channel.id)
                     
                     if case .success(let invite) = res {
-                        inviteSheetUrl = InviteUrl(url: URL(string: "https://rvlt.gg/\(invite.id)")!)
+                        inviteSheetUrl = InviteUrl(url: URL(string: "https://chat.setoka.net/invite/\(invite.id)")!)
                     }
                 }
             }

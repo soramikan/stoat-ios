@@ -1,6 +1,6 @@
 //
 //  LazyImage.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 14/10/2023.
 //

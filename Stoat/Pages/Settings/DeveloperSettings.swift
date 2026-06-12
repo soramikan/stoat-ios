@@ -1,6 +1,6 @@
 //
 //  DeveloperSettings.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo Manca on 2024-07-12.
 //

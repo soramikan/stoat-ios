@@ -1,6 +1,6 @@
 //
 //  Invite.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 09/03/2024.
 //

@@ -1,6 +1,6 @@
 //
 //  UnreadCounter.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 20/11/2023.
 //

@@ -1053,7 +1053,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "# export SENTRY_ORG=revolt\n# export SENTRY_PROJECT=apple-ios\n# export SENTRY_URL=https://sentry.revolt.chat/\n\n# sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" --force-foreground\n\n";
+			shellScript = "# export SENTRY_ORG=stoat\n# export SENTRY_PROJECT=apple-ios\n# export SENTRY_URL=https://sentry.stoat.chat/\n\n# sentry-cli debug-files upload --include-sources \"$DWARF_DSYM_FOLDER_PATH\" --force-foreground\n\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

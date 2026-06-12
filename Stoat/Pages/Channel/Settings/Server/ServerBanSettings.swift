@@ -1,6 +1,6 @@
 //
 //  ServerBanSettings.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 02/10/2024.
 //

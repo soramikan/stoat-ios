@@ -1,6 +1,6 @@
 //
 //  SettingsCommon.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 2024-02-10.
 //

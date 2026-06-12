@@ -1,6 +1,6 @@
 //
 //  Contents.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 25/12/2023.
 //
@@ -403,7 +403,7 @@ parser = many1 node
 //
 //    var body: some View {
 //        let font = UIFont.preferredFont(forTextStyle: .title1)
-//        let nsattr = NSAttributedString(string: "Zomatree", attributes: [.foregroundColor: UIColor.red, .font: font, .link: "https://revolt.chat"])
+//        let nsattr = NSAttributedString(string: "Zomatree", attributes: [.foregroundColor: UIColor.red, .font: font, .link: "https://chat.setoka.net"])
 //        let attr = AttributedString(nsattr)
 //        let large = UIImage(named: "large")!
 //        let image = Image(uiImage: large.imageWith(newSize: CGSize(width: font.pointSize, height: font.pointSize)))
@@ -479,7 +479,7 @@ parser = many1 node
 //
 //                        let name = member?.nickname ?? user.display_name ?? user.username
 //
-//                        let mention = NSAttributedString(string: name, attributes: [.foregroundColor: viewState.theme.accent.color, .font: boldFont, .link: "revoltchat://users?user=\(string)"])
+//                        let mention = NSAttributedString(string: name, attributes: [.foregroundColor: viewState.theme.accent.color, .font: boldFont, .link: "stoatchat://users?user=\(string)"])
 //                        let pfpUrl = (member?.avatar ?? user.avatar).map { viewState.formatUrl(with: $0) } ?? "\(viewState.http.baseURL)/users/\(user.id)/default_avatar"
 //                        
 //                        let image = getImage(url: URL(string: pfpUrl)!, round: true)
@@ -495,7 +495,7 @@ parser = many1 node
 //                    if let channel = viewState.channels[string] {
 //                        let name = channel.getName(viewState)
 //
-//                        mention = NSAttributedString(string: "#\(name)", attributes: [.foregroundColor: viewState.theme.accent.color, .font: boldFont, .link: "revoltchat://channels?channel=\(string)"])
+//                        mention = NSAttributedString(string: "#\(name)", attributes: [.foregroundColor: viewState.theme.accent.color, .font: boldFont, .link: "stoatchat://channels?channel=\(string)"])
 //                    } else {
 //                        mention = NSAttributedString(string: "#Unknown", attributes: [.foregroundColor: viewState.theme.accent.color, .font: boldFont])
 //                    }
@@ -750,7 +750,7 @@ parser = many1 node
 //                    view.label = UILabel()
 //                    view.label.text = "Hello"
 //                    textview.addSubview(view)
-//                    view.imageView.kf.setImage(with: URL(string: "https://autumn.revolt.chat/emojis/\(id)")!, placeholder: .none)
+//                    view.imageView.kf.setImage(with: URL(string: "https://chat.setoka.net/autumn/emojis/\(id)")!, placeholder: .none)
 //                    
 //                    attrString.insert(NSAttributedString(attachment: SubviewTextAttachment(view: view, size: CGSize(width: fontSize, height: fontSize))), at: lowerInt)
 //                    
@@ -771,7 +771,7 @@ parser = many1 node
 //                        
 //                        var currentAttrs = attrString.attributes(at: lowerInt, effectiveRange: nil)
 //                        
-//                        currentAttrs[.link] = URL(string: "revoltchat://channels?channel=\(id)")!
+//                        currentAttrs[.link] = URL(string: "stoatchat://channels?channel=\(id)")!
 //                        currentAttrs[.backgroundColor] = UIColor.clear.withAlphaComponent(0.1)
 //                        
 //                        let channelName = channel.getName(viewState)
@@ -1360,7 +1360,7 @@ struct InnerContents: UIViewRepresentable {
             }
         }
         
-        for match in attrString.string.matches(of: /(?:https?:\/\/)?(?:revolt|stoat)\.chat\/server\/(\w{26})\/channel\/(\w{26})\/(\w{26})/).reversed() {
+        for match in attrString.string.matches(of: /(?:https?:\/\/)?(?:(?:revolt|stoat)\.chat|chat\.setoka\.net)\/server\/(\w{26})\/channel\/(\w{26})\/(\w{26})/).reversed() {
             let serverId = String(match.output.1)
             let channelId = String(match.output.2)
             let messageId = match.output.3

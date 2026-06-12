@@ -1,6 +1,6 @@
 //
 //  ReportMessageSheetView.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo Manca on 2023-11-05.
 //

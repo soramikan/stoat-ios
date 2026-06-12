@@ -1,6 +1,6 @@
 //
 //  HomeRewritten.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 25/11/2023.
 //

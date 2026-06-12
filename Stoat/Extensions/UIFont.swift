@@ -1,6 +1,6 @@
 //
 //  UIFont.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 10/11/2024.
 //

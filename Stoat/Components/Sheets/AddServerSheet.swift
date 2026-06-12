@@ -1,6 +1,6 @@
 //
 //  JoinServer.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 01/11/2023.
 //
@@ -60,7 +60,7 @@ struct AddServerSheet: View {
         .alert("Invite code or link", isPresented: $showJoinServerAlert) {
             JoinServerAlert()
         } message: {
-            Text("Enter a link like rvlt.gg/Testers or an invite code like Testers")
+            Text("Enter a link like chat.setoka.net/invite/Testers or an invite code like Testers")
         }
     }
 }
@@ -71,7 +71,7 @@ struct JoinServerAlert: View {
     @State var text: String = ""
     
     func parseInvite() -> String? {
-        if let match = text.wholeMatch(of: /(?:(?:https?:\/\/)?rvlt\.gg\/)?(\w+)/) {
+        if let match = text.wholeMatch(of: /(?:(?:https?:\/\/)?(?:rvlt\.gg\/|chat\.setoka\.net\/invite\/))?(\w+)/) {
             return String(match.output.1)
         } else {
             return nil

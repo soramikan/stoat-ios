@@ -1,6 +1,6 @@
 //
 //  Api.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Zomatree on 21/04/2023.
 //
@@ -17,7 +17,7 @@ public struct CaptchaFeature: Codable {
     public var key: String
 }
 
-public struct RevoltFeature: Codable {
+public struct StoatFeature: Codable {
     public init(enabled: Bool, url: String) {
         self.enabled = enabled
         self.url = url
@@ -52,7 +52,7 @@ public struct LiveKitFeature: Codable {
 }
 
 public struct ApiFeatures: Codable {
-    public init(captcha: CaptchaFeature, email: Bool, invite_only: Bool, autumn: RevoltFeature, january: RevoltFeature, livekit: LiveKitFeature, limits: ApiLimits? = nil) {
+    public init(captcha: CaptchaFeature, email: Bool, invite_only: Bool, autumn: StoatFeature, january: StoatFeature, livekit: LiveKitFeature, limits: ApiLimits? = nil) {
         self.captcha = captcha
         self.email = email
         self.invite_only = invite_only
@@ -65,8 +65,8 @@ public struct ApiFeatures: Codable {
     public var captcha: CaptchaFeature
     public var email: Bool
     public var invite_only: Bool
-    public var autumn: RevoltFeature
-    public var january: RevoltFeature
+    public var autumn: StoatFeature
+    public var january: StoatFeature
     public var livekit: LiveKitFeature
     public var limits: ApiLimits?
 }

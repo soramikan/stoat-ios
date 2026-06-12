@@ -1,6 +1,6 @@
 //
 //  ChannelWebhookSettings.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 14/06/2025.
 //

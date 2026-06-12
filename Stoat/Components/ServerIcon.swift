@@ -1,6 +1,6 @@
 //
 //  ServerIcon.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 31/10/2023.
 //

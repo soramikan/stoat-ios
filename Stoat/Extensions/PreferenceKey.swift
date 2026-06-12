@@ -1,6 +1,6 @@
 //
 //  PreferenceKey.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 20/05/2025.
 //

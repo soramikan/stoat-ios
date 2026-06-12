@@ -1,6 +1,6 @@
 //
 //  ReversedSrollView.swift
-//  Revolt
+//  Stoat
 //
 //  Created by Angelo on 15/10/2023.
 //
