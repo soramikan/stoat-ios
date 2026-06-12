@@ -8,11 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		1701E08C2C4C395900DD970F /* emoji_15_1_ordering.json in Resources */ = {isa = PBXBuildFile; fileRef = 1701E08B2C4C395900DD970F /* emoji_15_1_ordering.json */; };
-		17C0DE012E10000000B00001 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 17C0DE002E10000000B00001 /* Localizable.xcstrings */; };
-		17C0DE112E10000100B00001 /* ServerCategoriesSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE102E10000100B00001 /* ServerCategoriesSettings.swift */; };
-		17C0DE132E10000100B00001 /* ServerMembersSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE122E10000100B00001 /* ServerMembersSettings.swift */; };
-		17C0DE152E10000100B00001 /* ServerInvitesSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE142E10000100B00001 /* ServerInvitesSettings.swift */; };
-		17C0DE172E10000100B00001 /* ReportUserSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE162E10000100B00001 /* ReportUserSheetView.swift */; };
 		170410972CA478D5002C1445 /* AllPermissionsSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170410962CA478D5002C1445 /* AllPermissionsSettings.swift */; };
 		170410992CA478F6002C1445 /* DefaultRoleSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170410982CA478F6002C1445 /* DefaultRoleSettings.swift */; };
 		170C23CE2C224B460057E399 /* UserSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 170C23CD2C224B460057E399 /* UserSettingsStore.swift */; };
@@ -120,6 +115,11 @@
 		17BC476B2B9CB51200A593DA /* ShareInviteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BC476A2B9CB51200A593DA /* ShareInviteSheet.swift */; };
 		17BF54CD2B1785E200178866 /* HomeWelcome.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BF54CC2B1785E200178866 /* HomeWelcome.swift */; };
 		17BF54D12B17B24200178866 /* LanguageSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17BF54D02B17B24200178866 /* LanguageSettings.swift */; };
+		17C0DE012E10000000B00001 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 17C0DE002E10000000B00001 /* Localizable.xcstrings */; };
+		17C0DE112E10000100B00001 /* ServerCategoriesSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE102E10000100B00001 /* ServerCategoriesSettings.swift */; };
+		17C0DE132E10000100B00001 /* ServerMembersSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE122E10000100B00001 /* ServerMembersSettings.swift */; };
+		17C0DE152E10000100B00001 /* ServerInvitesSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE142E10000100B00001 /* ServerInvitesSettings.swift */; };
+		17C0DE172E10000100B00001 /* ReportUserSheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C0DE162E10000100B00001 /* ReportUserSheetView.swift */; };
 		17C212442CD19E77002D486C /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C212432CD19E75002D486C /* Section.swift */; };
 		17C444582B06CC5400F97E4A /* ForgotPassword.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C444572B06CC5400F97E4A /* ForgotPassword.swift */; };
 		17C557422D93B1D700718D39 /* Webhook.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17C557412D93B1D500718D39 /* Webhook.swift */; };
@@ -892,6 +892,7 @@
 				D49B704D29C4D3FE009494A5 /* Resources */,
 				1773C02B2C07DC32007B8867 /* Embed Frameworks */,
 				170038142C37875F00F8B134 /* Embed Foundation Extensions */,
+				17D5A1002E10010000B00001 /* Copy Package dSYMs */,
 				179366C82BFAD17D00FC420D /* Run Script */,
 			);
 			buildRules = (
@@ -1035,6 +1036,27 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		17D5A1002E10010000B00001 /* Copy Package dSYMs */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/ci_scripts/copy_package_dsyms.sh",
+			);
+			name = "Copy Package dSYMs";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${DWARF_DSYM_FOLDER_PATH}/Sentry.framework.dSYM",
+				"${DWARF_DSYM_FOLDER_PATH}/LiveKitWebRTC.framework.dSYM",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/ci_scripts/copy_package_dsyms.sh\"\n";
+		};
 		179366C82BFAD17D00FC420D /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 8;
